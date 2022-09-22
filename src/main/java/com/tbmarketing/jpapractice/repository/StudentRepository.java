@@ -13,4 +13,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
      * More customized queries can be added using the @Query annotation
      */
     public List<Student> findByFirstName(String firstName);
+
+    /** Match results of student containing the given sequence of characters in thei firsName attribute **/
+    public List<Student> findByFirstNameContaining(String sequence);
 }

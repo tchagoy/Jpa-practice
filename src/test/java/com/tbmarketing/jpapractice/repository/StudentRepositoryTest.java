@@ -43,6 +43,14 @@ class StudentRepositoryTest {
             System.out.println(student);
         }
     }
+
+    @Test
+    public void printStudentByFirstNameContaining(){
+        List<Student> students = studentRepository.findByFirstNameContaining("irst");
+        for(Student student : students){
+            System.out.println(student);
+        }
+    }
     @Test
     public void printAllStudent(){
         List<Student> students = studentRepository.findAll();
