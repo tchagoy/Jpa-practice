@@ -2,6 +2,7 @@ package com.tbmarketing.jpapractice.repository;
 
 import com.tbmarketing.jpapractice.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
      * attribute "firstName" of Student Entity. Spring Data will analyse
      * the method names and try to generate queries automatically (with some limitations)
      * More customized queries can be added using the @Query annotation
+     * Read more about Supported keywords inside method names here:
+     * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
      */
     public List<Student> findByFirstName(String firstName);
 
@@ -28,4 +31,14 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
      * does this: Student -> Guardian -> Name derived from the method declaration below
      */
     public List<Student> findByGuardianName(String guardianName);
+
+    /** Multiple parameters **/
+    Student findByFirstNameAndLastName(String firstName, String lastName);
+
+    /** From this point forward using the @Query annotation for
+     * JPQL queries (based on attributes in the Entity class) **/
+
+    //JPQL
+    @Query("SELECT s FROM Student s WHERE s.emailId = ?1")
+    Student getStudentByEmailAddress(String email);
 }

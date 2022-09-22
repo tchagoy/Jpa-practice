@@ -84,6 +84,12 @@ class StudentRepositoryTest {
         }
     }
 
+    @Test
+    public void printStudentByEmailAddress(){
+        Student student = studentRepository.getStudentByEmailAddress("emailexample@email.com");
+        System.out.println(student);
+    }
+
 
 
 }
