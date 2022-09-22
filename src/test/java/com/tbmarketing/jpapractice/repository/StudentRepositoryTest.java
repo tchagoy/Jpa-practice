@@ -1,5 +1,6 @@
 package com.tbmarketing.jpapractice.repository;
 
+import com.tbmarketing.jpapractice.entity.Guardian;
 import com.tbmarketing.jpapractice.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,17 @@ class StudentRepositoryTest {
 
     @Test
     public void saveStudent(){
+        Guardian guardian = Guardian.builder()
+                .email("guardianEmail2@email.com")
+                .name("guardianName")
+                .mobile("18008888")
+                .build();
+
         Student student = Student.builder()
-                .emailId("emailexample@email.com")
+                .emailId("emailexample2@email.com")
                 .firstName("firstName")
                 .lastName("lastName")
-                .guardianEmail("guardianEmail@email.com")
-                .guardianName("guardianName")
-                .guardianMobile("9999999999")
+                .guardian(guardian)
                 .build();
 
         studentRepository.save(student);

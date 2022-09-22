@@ -41,7 +41,8 @@ public class Student {
             nullable = false
     )
     private String emailId;
-    private String guardianName;
-    private String guardianEmail;
-    private String guardianMobile;
+
+    @Embedded
+    private Guardian guardian;
+
 }
