@@ -19,4 +19,13 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     /** Match results of student by lastName **/
     public List<Student> findByLastName(String lastName);
+
+    /** Match results of students where last name is not null (last name must exist) **/
+    public List<Student> findByLastNameNotNull();
+
+    /** This one is is a bit more obtuse; find by guardian name. Student has an object of type
+     * Guardian, and guardian has an attribute/property named 'name', guessing Spring Data
+     * does this: Student -> Guardian -> Name derived from the method declaration below
+     */
+    public List<Student> findByGuardianName(String guardianName);
 }

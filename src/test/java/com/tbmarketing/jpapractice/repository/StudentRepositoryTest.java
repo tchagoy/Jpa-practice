@@ -59,6 +59,23 @@ class StudentRepositoryTest {
             System.out.println(student);
         }
     }
+
+    @Test
+    public void printStudentBasedOnGuardianName(){
+        List<Student> students = studentRepository.findByGuardianName("guardianName");
+        for(Student student : students){
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void printStudentLastNameNotNull(){
+        List<Student> students = studentRepository.findByLastNameNotNull();
+        for(Student student : students){
+            System.out.println(student);
+        }
+    }
+
     @Test
     public void printAllStudent(){
         List<Student> students = studentRepository.findAll();
@@ -66,6 +83,7 @@ class StudentRepositoryTest {
             System.out.println(student);
         }
     }
+
 
 
 }
