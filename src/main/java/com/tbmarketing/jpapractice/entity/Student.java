@@ -32,6 +32,7 @@ public class Student {
             generator = "student_sequence"
     )
     private Long studentId;
+
     private String firstName;
     private String lastName;
     @Column( /** email_address will be name of column created/added (or reference that column if already exists) instead of emailId **/
