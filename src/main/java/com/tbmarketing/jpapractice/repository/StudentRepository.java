@@ -16,4 +16,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     /** Match results of student containing the given sequence of characters in thei firsName attribute **/
     public List<Student> findByFirstNameContaining(String sequence);
+
+    /** Match results of student by lastName **/
+    public List<Student> findByLastName(String lastName);
 }
