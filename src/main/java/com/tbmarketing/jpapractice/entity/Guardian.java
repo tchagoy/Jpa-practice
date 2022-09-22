@@ -39,7 +39,7 @@ import javax.persistence.Embeddable;
                 ),
                 @AttributeOverride(
                         name = "mobile",
-                        column = @Column(name = "guardian_column")
+                        column = @Column(name = "guardian_mobile")
                 )
         }
 )
