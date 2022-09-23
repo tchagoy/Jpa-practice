@@ -2,12 +2,17 @@ package com.tbmarketing.jpapractice.repository;
 
 import com.tbmarketing.jpapractice.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    /** ================ FETCHING DATA ========================== **/
+
 
     /** create a custom repository method, will find all students by
      * attribute "firstName" of Student Entity. Spring Data will analyse
@@ -67,6 +72,22 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             /** add more parameters as needed in the same fashion **/
     );
 
+    /** ===================== UPDATING DATA ======================= **/
 
+    /** make sure to add the @Modifying annotation for any UPDATE/DELETE operations (ONLY ON REPOSITORY LEVEL) **/
+    @Modifying
+    /** the @Transactional annotation is used here, but should be used at the SERVICE LAYER, specially when
+     * multiple transactions involving multiple repositories are being made
+     */
+    @Transactional
+    @Query(
+            value = "UPDATE tbl_student SET first_name = :name " +
+                    "WHERE email_address = :email",
+            nativeQuery = true
+    )
+    int updateStudentNameByEmailId(
+            @Param("name")String name,
+            @Param("email")String email
+    );
 
 }

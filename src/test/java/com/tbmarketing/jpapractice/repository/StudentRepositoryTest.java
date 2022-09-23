@@ -109,4 +109,21 @@ class StudentRepositoryTest {
         Student student = studentRepository.getStudentByEmailAddressNativeNamedParam("guardianEmail@email.com");
         System.out.println(student);
     }
+
+    @Test
+    public void updateStudentFirstNameByEmail(){
+        Student student = studentRepository.getStudentByEmailAddress("emailexample2@email.com");
+
+        System.out.println("Name BEFORE update: " + student.getFirstName());
+
+        int result = studentRepository.updateStudentNameByEmailId("Tony","emailexample2@email.com");
+
+        student = studentRepository.getStudentByEmailAddress("emailexample2@email.com");
+
+        System.out.println("Name AFTER update " + student.getFirstName());
+
+        System.out.println("RESETING TO ORIGINAL NAME");
+            result = studentRepository.updateStudentNameByEmailId("Tomas", "emailexample2@email.com") ;
+
+    }
 }
