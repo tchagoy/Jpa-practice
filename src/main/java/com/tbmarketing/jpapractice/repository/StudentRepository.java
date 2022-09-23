@@ -38,7 +38,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     /** From this point forward using the @Query annotation for
      * JPQL queries (based on attributes in the Entity class) **/
 
-    //JPQL
+    /** JPQL EXAMPLES **/
     @Query("SELECT s FROM Student s WHERE s.emailId = ?1")
     Student getStudentByEmailAddress(String email);
+
+    @Query("SELECT s.firstName FROM Student s WHERE s.guardian.email = ?1")
+    List<String> getStudentByGuardianEmail(String email);
 }
