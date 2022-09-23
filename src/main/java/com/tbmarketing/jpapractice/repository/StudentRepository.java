@@ -3,6 +3,7 @@ package com.tbmarketing.jpapractice.repository;
 import com.tbmarketing.jpapractice.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -47,10 +48,25 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     /** NATIVE QUERIES
      * For very complex queries, us native queries instead **/
-     @Query(
-             value = "SELECT * FROM tbl_student s WHERE s.guardian_email = ?1",
-             nativeQuery = true
-     )
+    @Query(
+            value = "SELECT * FROM tbl_student s WHERE s.guardian_email = ?1",
+            nativeQuery = true
+    )
     Student getStudentByEmailAddressNative(String email);
+
+    /** NAMED PARAMETERS EXAMPLE **/
+    /** same as above, but with multiple named parameters **/
+    @Query(
+            /** Name the paramer with :paramName **/
+            value = "SELECT * FROM tbl_student s WHERE s.guardian_email = :emailId",
+            nativeQuery = true
+    )
+    Student getStudentByEmailAddressNativeNamedParam(
+            /** annotate with @Param("paramName") **/
+            @Param("emailId") String email
+            /** add more parameters as needed in the same fashion **/
+    );
+
+
 
 }
