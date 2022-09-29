@@ -28,4 +28,13 @@ public class Course {
     private String title;
     private Integer credit;
 
+    @OneToOne(
+            /** Since CourseMaterial is already referencing the relationship, just
+             * indicate which Entity ATTRIBUTE is doing the work (in this case, the attribute
+             * is "course" from CourseMaterial class).
+            */
+            mappedBy = "course"
+    )
+    private CourseMaterial courseMaterial;
+
 }
