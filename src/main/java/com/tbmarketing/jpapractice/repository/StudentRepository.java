@@ -54,7 +54,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     /** NATIVE QUERIES
      * For very complex queries, us native queries instead **/
     @Query(
-            value = "SELECT * FROM tbl_student s WHERE s.guardian_email = ?1",
+            value = "SELECT * FROM tbl_student s WHERE s.email_address = ?1",
             nativeQuery = true
     )
     Student getStudentByEmailAddressNative(String email);
@@ -63,7 +63,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     /** same as above, but with multiple named parameters **/
     @Query(
             /** Name the paramer with :paramName **/
-            value = "SELECT * FROM tbl_student s WHERE s.guardian_email = :emailId",
+            value = "SELECT * FROM tbl_student s WHERE s.email_address = :emailId",
             nativeQuery = true
     )
     Student getStudentByEmailAddressNativeNamedParam(
