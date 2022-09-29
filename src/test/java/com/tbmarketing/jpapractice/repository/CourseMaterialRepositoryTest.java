@@ -26,8 +26,8 @@ class CourseMaterialRepositoryTest {
         /** There is a need to save course first, otherwise it will become a
          * transient entity. Rules applied on JOIN requires Course entity to be
          * added to course table in DB.
-         */
-        courseRepository.save(course);
+         * USED CASCADING, REFER TO CourseMaterial CLASS.
+        //courseRepository.save(course);
 
         /** Create CourseMaterial entity, use above course, and save entity to
          *  course_material table

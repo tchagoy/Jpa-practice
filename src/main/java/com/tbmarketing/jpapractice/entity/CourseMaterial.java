@@ -27,7 +27,16 @@ public class CourseMaterial {
     private Long courseMaterialId;
     private String url;
 
-    @OneToOne /** mapping CourseMaterial CONSISTS of a Course. CourseMaterial CANNOT exists without a Course **/
+    @OneToOne( /** mapping CourseMaterial CONSISTS of a Course. CourseMaterial CANNOT exists without a Course **/
+            /** Cascade gives this entity permission by parent (CourseMaterial) to use the same
+             * permissions parent has. There are different types of cascade, look as needed
+            */
+            cascade = CascadeType.ALL,
+            /** FETCH
+             * EAGER -> Bring the Course data too
+             * LAZY -> Only bring data for this entity **/
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(/** Which particular Column in Course Table will be designated as the Foreign Key for THIS Course **/
     /** In other words, which column will join Course and Course Material tables **/
             name = "course_id", //column name in db table
