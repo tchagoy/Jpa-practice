@@ -2,9 +2,13 @@ package com.tbmarketing.jpapractice.repository;
 
 import com.tbmarketing.jpapractice.entity.Course;
 import com.tbmarketing.jpapractice.entity.CourseMaterial;
+import com.tbmarketing.jpapractice.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Collection;
+import java.util.List;
 
 @SpringBootTest
 class CourseMaterialRepositoryTest {
@@ -12,8 +16,34 @@ class CourseMaterialRepositoryTest {
     @Autowired
     private CourseMaterialRepository courseMaterialRepository;
 
-    @Autowired
-    private CourseRepository courseRepository;
+    public void printCourseMaterial(Collection<CourseMaterial> materials, int seconds){
+        Runnable runnable = new Runnable() {
+
+            int milliseconds = seconds * 1000;
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(milliseconds);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getStackTrace());
+                }
+            }
+        };
+
+        if(materials.isEmpty()) {
+            System.out.println("===============================================================================================================================================================");
+            System.out.println("NO COURSE MATERIAL(S) FOUND");
+            runnable.run();
+        }
+
+        else{
+            for(CourseMaterial material : materials){
+                System.out.println("===============================================================================================================================================================");
+                System.out.println("FOUND COURSE MATERIAL: " + material);
+                runnable.run();
+            }
+        }
+    }
 
     @Test
     public void saveCourseMaterial(){
@@ -39,6 +69,12 @@ class CourseMaterialRepositoryTest {
                         .build();
 
         courseMaterialRepository.save(courseMaterial);
+    }
+
+    @Test
+    public void printAllCourseMaterial(){
+        List<CourseMaterial> courseMaterials = courseMaterialRepository.findAll();
+        printCourseMaterial(courseMaterials,1);
     }
 
 }

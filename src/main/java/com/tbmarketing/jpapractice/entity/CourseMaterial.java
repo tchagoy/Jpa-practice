@@ -1,9 +1,6 @@
 package com.tbmarketing.jpapractice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/** Do NOT include Course in toString method
+ * This is done to avoid the LazyInitializationException
+ * Can also use FetchType.EAGER property instead of FetchType.LAZY **/
+@ToString(exclude = "course")
 @Entity
 public class CourseMaterial {
 

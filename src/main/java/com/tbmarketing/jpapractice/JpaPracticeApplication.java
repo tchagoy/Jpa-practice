@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import com.tbmarketing.jpapractice.entity.Guardian;
 import com.tbmarketing.jpapractice.entity.Student;
 import com.tbmarketing.jpapractice.loader.InfoLoader;
+import com.tbmarketing.jpapractice.repository.CourseMaterialRepository;
+import com.tbmarketing.jpapractice.repository.CourseRepository;
 import com.tbmarketing.jpapractice.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,13 +26,15 @@ public class JpaPracticeApplication {
 
 	@Bean
 	CommandLineRunner commandLineRunner(
-			StudentRepository studentRepository
+			StudentRepository studentRepository,
+			CourseRepository courseRepository,
+			CourseMaterialRepository courseMaterialRepository
 	){
 		return args -> {
 			Long seed = 1000010L;
 
 			InfoLoader.fillWithStudents(studentRepository,seed,50);
-
+			InfoLoader.fillWithCourses(courseMaterialRepository,seed);
 		};
 	}
 }

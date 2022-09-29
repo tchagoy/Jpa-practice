@@ -1,12 +1,13 @@
 package com.tbmarketing.jpapractice.loader;
 
 import com.github.javafaker.Faker;
+import com.tbmarketing.jpapractice.entity.Course;
+import com.tbmarketing.jpapractice.entity.CourseMaterial;
 import com.tbmarketing.jpapractice.entity.Guardian;
 import com.tbmarketing.jpapractice.entity.Student;
 import com.tbmarketing.jpapractice.repository.CourseMaterialRepository;
 import com.tbmarketing.jpapractice.repository.CourseRepository;
 import com.tbmarketing.jpapractice.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Locale;
 import java.util.Random;
@@ -45,5 +46,43 @@ public class InfoLoader {
             studentRepository.save(student);
         }
 
+
+
     }
+
+    public static void fillWithCourses(CourseMaterialRepository courseMaterialRepository, long seed){
+        Random random = new Random(seed);
+        Faker faker = new Faker(random);
+
+        String[] courseNames = {
+                "Calculus",
+                "Physics",
+                "Biochemistry",
+                "Physical Education",
+                "Boxing",
+                "Sculpting",
+                "Statistics",
+                "Programming",
+                "Painting"
+        };
+
+        for(int i = 0; i < courseNames.length; i++){
+            int credit = random.nextInt(2) + 3;
+            String title = courseNames[i];
+
+            Course course = Course.builder()
+                    .credit(credit)
+                    .title(title)
+                    .build();
+
+            String url = faker.internet().url();
+            CourseMaterial courseMaterial = CourseMaterial.builder()
+                    .url(url)
+                    .course(course)
+                    .build();
+
+            courseMaterialRepository.save(courseMaterial);
+        }
+    }
+
 }

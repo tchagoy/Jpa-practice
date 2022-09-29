@@ -47,7 +47,6 @@ class StudentRepositoryTest {
                 runnable.run();
             }
         }
-
     }
 
     @Test
