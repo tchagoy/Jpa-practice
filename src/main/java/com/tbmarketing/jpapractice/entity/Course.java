@@ -37,4 +37,8 @@ public class Course {
     )
     private CourseMaterial courseMaterial;
 
+    @ManyToOne(
+    )
+    private Teacher teacher;
+
 }
