@@ -30,12 +30,12 @@ public class Teacher {
     private String lastName;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.ALL
             //fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "teacher_id", //name of NEW EXTRA column in course table.
-            referencedColumnName = "teacherId" //Attribute used from Teacher to join on Course table
+            referencedColumnName = "id" //Attribute used from Teacher to join on Course table
     )
     private List<Course> courses;
 }
