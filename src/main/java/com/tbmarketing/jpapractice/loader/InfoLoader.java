@@ -9,6 +9,7 @@ import com.tbmarketing.jpapractice.repository.CourseMaterialRepository;
 import com.tbmarketing.jpapractice.repository.CourseRepository;
 import com.tbmarketing.jpapractice.repository.StudentRepository;
 
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Random;
 
@@ -85,4 +86,32 @@ public class InfoLoader {
         }
     }
 
+    public static void printWithDelay(Collection collection, String message, int seconds){
+        Runnable runnable = new Runnable() {
+
+            int milliseconds = seconds * 1000;
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(milliseconds);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getStackTrace());
+                }
+            }
+        };
+
+        if(collection.isEmpty()) {
+            System.out.println("===============================================================================================================================================================");
+            System.out.println("NO "+ message.toUpperCase() + "(S) FOUND");
+            runnable.run();
+        }
+
+        else{
+            for(Object object: collection){
+                System.out.println("===============================================================================================================================================================");
+                System.out.println("FOUND " + message.toUpperCase() + ": " + object);
+                runnable.run();
+            }
+        }
+    }
 }
