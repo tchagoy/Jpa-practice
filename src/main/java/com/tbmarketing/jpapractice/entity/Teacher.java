@@ -25,10 +25,14 @@ public class Teacher {
             strategy = GenerationType.SEQUENCE,
             generator = "teacher_sequence"
     )
-    private long id;
+    private long teacherId;
     private String firstName;
     private String lastName;
 
+    /**
+     * It is highly recommended that @ManyToOne is used instead of
+     * @OneToMany annotation.
+     *
     @OneToMany(
             cascade = CascadeType.ALL
             //fetch = FetchType.LAZY
@@ -37,5 +41,7 @@ public class Teacher {
             name = "teacher_id", //name of NEW EXTRA column in course table.
             referencedColumnName = "id" //Attribute used from Teacher to join on Course table
     )
+
     private List<Course> courses;
+     **/
 }

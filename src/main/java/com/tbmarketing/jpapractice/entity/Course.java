@@ -37,4 +37,19 @@ public class Course {
     )
     private CourseMaterial courseMaterial;
 
+    /** Instead of having Teacher Entity have a List<Course> they teach, it is more recommened to change
+     * the relationship from:
+     * Teacher teaches Courses  (@OneToMany annotation)  TO
+     * Course is taught by Teacher (@ManyToOne annotation)
+     * Refer to Teacher class for commented version of @OneToMany **/
+
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "teacher_id",
+            referencedColumnName = "teacherId"
+    )
+    private Teacher teacher;
+
 }

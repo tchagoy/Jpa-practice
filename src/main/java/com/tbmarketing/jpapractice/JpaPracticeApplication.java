@@ -7,6 +7,7 @@ import com.tbmarketing.jpapractice.loader.InfoLoader;
 import com.tbmarketing.jpapractice.repository.CourseMaterialRepository;
 import com.tbmarketing.jpapractice.repository.CourseRepository;
 import com.tbmarketing.jpapractice.repository.StudentRepository;
+import com.tbmarketing.jpapractice.repository.TeacherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,13 +29,15 @@ public class JpaPracticeApplication {
 	CommandLineRunner commandLineRunner(
 			StudentRepository studentRepository,
 			CourseRepository courseRepository,
-			CourseMaterialRepository courseMaterialRepository
+			CourseMaterialRepository courseMaterialRepository,
+			TeacherRepository teacherRepository
 	){
 		return args -> {
 			Long seed = 1000010L;
+			long courseCount = courseRepository.count();
 
 			InfoLoader.fillWithStudents(studentRepository,seed,50);
-			InfoLoader.fillWithCourses(courseMaterialRepository,seed);
+			InfoLoader.fillWithCourses(courseMaterialRepository,teacherRepository,seed);
 		};
 	}
 }

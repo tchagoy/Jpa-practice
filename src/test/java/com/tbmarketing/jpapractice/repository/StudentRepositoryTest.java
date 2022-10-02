@@ -95,7 +95,7 @@ class StudentRepositoryTest {
 
         System.out.println("Name BEFORE update: " + student.getFirstName());
 
-        int result = studentRepository.updateStudentNameByEmailId("MIKASA",email);
+        int result = studentRepository.updateStudentNameByEmailId("LULU VALE CACA",email);
 
         student = studentRepository.getStudentByEmailAddress(email);
 
