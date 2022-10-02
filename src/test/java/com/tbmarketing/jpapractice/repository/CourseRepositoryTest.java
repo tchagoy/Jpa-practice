@@ -6,8 +6,10 @@ import com.tbmarketing.jpapractice.loader.InfoLoader;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,5 +53,52 @@ class CourseRepositoryTest {
 
         InfoLoader.printWithDelay(courses, "course",3);
 
+    }
+
+    @Test
+    public void findAllSortByTitle(){
+        Pageable pageable =
+                PageRequest.of(0,2,
+                        Sort.by("title"));
+
+        List<Course> courses
+                = courseRepository.findAll(pageable).getContent();
+
+        InfoLoader.printWithDelay(courses,"course",3);
+    }
+
+    @Test
+    public void findAllSortByCreditDesc(){
+        Pageable pageable =
+                PageRequest.of(0,2, Sort.by("credit").descending());
+
+        List<Course> courses
+                = courseRepository.findAll(pageable).getContent();
+
+        InfoLoader.printWithDelay(courses,"course",3);
+    }
+
+    @Test
+    public void findAllSortByTitleAndCreditDesc(){
+        Pageable pageable =
+                PageRequest.of(0,2,
+                        Sort.by("title").descending()
+                                .and(Sort.by("credit")));
+
+        List<Course> courses
+                = courseRepository.findAll(pageable).getContent();
+
+        InfoLoader.printWithDelay(courses,"course",3);
+    }
+
+    @Test
+    public void printFindByTitleContaining(){
+        Pageable firstPageTenRecords =
+                PageRequest.of(0,10);
+
+        List<Course> courses =
+                courseRepository.findByTitleContaining("a", firstPageTenRecords).getContent();
+
+        InfoLoader.printWithDelay(courses, "course", 3);
     }
 }
