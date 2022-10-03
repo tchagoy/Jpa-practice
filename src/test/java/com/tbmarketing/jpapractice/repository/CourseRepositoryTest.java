@@ -1,18 +1,19 @@
 package com.tbmarketing.jpapractice.repository;
 
+import com.github.javafaker.Faker;
 import com.tbmarketing.jpapractice.entity.Course;
-import com.tbmarketing.jpapractice.entity.CourseMaterial;
+import com.tbmarketing.jpapractice.entity.Student;
+import com.tbmarketing.jpapractice.entity.Teacher;
 import com.tbmarketing.jpapractice.loader.InfoLoader;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 
 @SpringBootTest
@@ -100,5 +101,33 @@ class CourseRepositoryTest {
                 courseRepository.findByTitleContaining("a", firstPageTenRecords).getContent();
 
         InfoLoader.printWithDelay(courses, "course", 3);
+    }
+
+    @Test
+    public void saveCourseWithStudentAndTeacher(){
+        Random random = new Random(900000L);
+        Faker faker = new Faker(random);
+
+        Teacher teacher = Teacher.builder()
+                .firstName(faker.name().firstName())
+                .lastName(faker.name().lastName())
+                .build();
+
+        Student student = Student.builder()
+                .firstName(faker.name().firstName())
+                .lastName(faker.name().lastName())
+                .emailId(faker.internet().emailAddress())
+                .build();
+
+        Course course = Course.builder()
+                .title("Artificial Intelligence")
+                .credit(6)
+                .teacher(teacher)
+                .build();
+
+        course.addStudent(student);
+
+        courseRepository.save(course);
+
     }
 }

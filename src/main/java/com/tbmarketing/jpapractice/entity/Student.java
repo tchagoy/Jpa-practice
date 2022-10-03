@@ -3,6 +3,7 @@ package com.tbmarketing.jpapractice.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data /** Try not to use @Data, issues with Equals/Hashmap, this is done for example purpose only**/
 @AllArgsConstructor
@@ -44,5 +45,6 @@ public class Student {
 
     @Embedded
     private Guardian guardian;
+
 
 }
